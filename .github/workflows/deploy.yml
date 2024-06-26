@@ -19,13 +19,15 @@ jobs:
           node-version: "16"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        working-directory: ./frontend # Specify the directory where your package.json is located
 
       - name: Build the app
         run: npm run build
+        working-directory: ./frontend # Specify the directory where your package.json is located
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./frontend/dist # Specify the directory where the build output is located
